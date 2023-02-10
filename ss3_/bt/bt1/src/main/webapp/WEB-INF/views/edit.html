@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Edit</h1>
+<form th:object="${product}" th:action="@{/product/edit/{index}(index=${indexNum})}" method="post">
+<!--    <input hidden type="number" id = "indexNum" name = "indexNum" th:value="${indexNum}">-->
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>
+                <input type="number" th:field="*{id}" th:placeholder="${product.id}" >
+            </td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>
+                <input th:field="*{name}" th:placeholder="${product.name}" >
+            </td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td>
+                <input type="number" th:field="*{price}" th:placeholder="${product.price}" >
+            </td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>
+                <input th:field="*{description}" th:placeholder="${product.description}" >
+            </td>
+        </tr>
+        <tr>
+            <td>Maker</td>
+            <td>
+                <input th:field="*{maker}" th:placeholder="${product.maker}" >
+            </td>
+        </tr>
+    </table>
+    <br>
+    <button>Edit</button>
+</form>
+<br>
+<a th:href="@{/product/list}"><button>Back</button></a>
+</body>
+</html>
