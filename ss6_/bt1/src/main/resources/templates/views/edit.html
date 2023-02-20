@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Edit</h1>
+<form th:object="${blog}" th:action="@{/blog/edit}" method="post">
+    <table>
+        <input th:field="*{id}" hidden>
+        <tr>
+            <td>Type: </td>
+            <td>
+                <select th:field="*{type}" class="form-control">
+                    <option th:each="type : ${typeList}" th:text="${type.type}" th:value="${type.id}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Title: </td>
+            <td>
+                <input th:field="*{title}">
+            </td>
+        </tr>
+        <tr>
+            <td>Body: </td>
+            <td>
+                <textarea rows="6" cols="50" th:field="*{body}"></textarea>
+            </td>
+        </tr>
+    </table>
+    <button>Save</button>
+</form>
+</body>
+</html>
