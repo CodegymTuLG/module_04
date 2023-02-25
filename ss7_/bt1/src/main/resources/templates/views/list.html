@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>BLOG LIST</h1>
+<br>
+<a th:href="@{/user/create}"><button >Create new</button></a>
+<br>
+<table border="1">
+    <tr>
+        <th>STT</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Phone number</th>
+        <th>Email</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>Detail</th>
+    </tr>
+    <tr th:each="user, row : ${listUser}">
+        <td th:text="${row.count}"></td>
+        <td th:text="${user.firstName}+${user.lastName}"></td>
+        <td th:text="${user.age}"></td>
+        <td th:text="${user.phoneNumber}"></td>
+        <td th:text="${user.email}"></td>
+        <td>
+            <a th:href="@{/user/edit/{id}(id=${user.id})}">
+                <button>Edit</button>
+            </a>
+        </td>
+        <td>
+            <a th:href="@{/user/delete/{id}(id=${user.id})}">
+                <button>Delete</button>
+            </a>
+        </td>
+        <td>
+            <a th:href="@{/user/detail/{id}(id=${user.id})}">
+                <button>Detail</button>
+            </a>
+        </td>
+    </tr>
+    <tr th:if="${listUser.isEmpty()}">
+        <td colspan="10">empty</td>
+    </tr>
+</table>
+</body>
+</html>

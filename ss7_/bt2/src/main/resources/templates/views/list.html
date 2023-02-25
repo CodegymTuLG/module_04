@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>SONG LIST</h1>
+<br>
+<a th:href="@{/song/create}"><button >Create new</button></a>
+<br>
+<table border="1">
+    <tr>
+        <th>STT</th>
+        <th>Song name</th>
+        <th>Singer</th>
+        <th>Type</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:each="song, row : ${songList}">
+        <td th:text="${row.count}"></td>
+        <td th:text="${song.songName}"></td>
+        <td th:text="${song.singer}"></td>
+        <td th:text="${song.type}"></td>
+        <td>
+            <a th:href="@{/song/edit/{id}(id=${song.id})}">
+                <button>Edit</button>
+            </a>
+        </td>
+        <td>
+            <a th:href="@{/song/delete/{id}(id=${song.id})}">
+                <button>Delete</button>
+            </a>
+        </td>
+    </tr>
+    <tr th:if="${songList.isEmpty()}">
+        <td colspan="10">empty</td>
+    </tr>
+</table>
+</body>
+</html>
