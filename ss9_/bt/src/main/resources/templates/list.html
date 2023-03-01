@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>BOOK LIST</h1>
+<br>
+<a th:href="@{/library/create}"><button>Add new book</button></a>
+<a th:href="@{/library/rent}"><button>Rent book</button></a>
+<a th:href="@{/library/return}"><button>Return book</button></a>
+<br>
+<table border="1">
+    <tr>
+        <th>STT</th>
+        <th>Book Name</th>
+        <th>Count</th>
+    </tr>
+    <tr th:each="book, row : ${libraryList}">
+        <td th:text="${row.count}"></td>
+        <td th:text="${book.bookName}"></td>
+        <td th:text="${book.count}"></td>
+    </tr>
+    <tr th:if="${libraryList.isEmpty()}">
+        <td colspan="10">Empty</td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Create new</h1>
+<form th:object="${bookLibraryDto}" th:action="@{/library/create}" method="post">
+    <input th:field="*{id}" hidden>
+    <table>
+        <tr>
+            <td>Book Name</td>
+            <td>
+                <input th:field="*{bookName}"><br>
+                <small style="color: red" th:if="${#fields.hasErrors('bookName')}" th:errors="*{bookName}"></small><br>
+            </td>
+        </tr>
+        <tr>
+            <td>Number</td>
+            <td>
+                <input th:field="*{count}"><br>
+                <small style="color: red" th:if="${#fields.hasErrors('count')}" th:errors="*{count}"></small><br>
+            </td>
+        </tr>
+    </table>
+    <button>Save</button>
+</form>
+</body>
+</html>

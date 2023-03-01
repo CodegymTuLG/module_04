@@ -19,12 +19,6 @@
                 Languages
             </td>
             <td><form:select path="language">
-                <%--                <c:when test="${rentTypeMaster.getRenttype_id()}==${rt}">--%>
-<%--                    <option selected value="${rentTypeMaster.getRenttype_id()}">${rentTypeMaster.getType()}</option>--%>
-<%--                </c:when>--%>
-<%--                <c:otherwise>--%>
-<%--                    <option selected value="${rentTypeMaster.getRenttype_id()}">${rentTypeMaster.getType()}</option>--%>
-<%--                </c:otherwise>--%>
                 <form:option value="NONE"> --SELECT--</form:option>
                 <form:options items="${languages}"></form:options>
             </form:select></td>
