@@ -1,34 +1,46 @@
 package com.example.case_study.model;
 
+import javax.persistence.*;
+import java.util.Set;
+@Entity
 public class CustomerType {
-    private int customertype_id;
-    private String type;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String name;
+    @OneToMany(mappedBy = "customerTypeId")
+    private Set<Customer> setCustomerTypeId;
 
     public CustomerType() {
     }
 
-    public CustomerType(int customertype_id) {
-        this.customertype_id = customertype_id;
+    public CustomerType(int id, String name, Set<Customer> setCustomerTypeId) {
+        this.id = id;
+        this.name = name;
+        this.setCustomerTypeId = setCustomerTypeId;
     }
 
-    public CustomerType(int customertype_id, String type) {
-        this.customertype_id = customertype_id;
-        this.type = type;
+    public int getId() {
+        return id;
     }
 
-    public int getCustomertype_id() {
-        return customertype_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setCustomertype_id(int customertype_id) {
-        this.customertype_id = customertype_id;
+    public String getName() {
+        return name;
     }
 
-    public String getType() {
-        return type;
+    public void setName(String type) {
+        this.name = type;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public Set<Customer> getSetCustomerTypeId() {
+        return setCustomerTypeId;
+    }
+
+    public void setSetCustomerTypeId(Set<Customer> setCustomerTypeId) {
+        this.setCustomerTypeId = setCustomerTypeId;
     }
 }

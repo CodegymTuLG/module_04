@@ -1,66 +1,48 @@
-package model;
+package com.example.case_study.model;
 
-import service.contract.FacilityContract;
+import javax.persistence.*;
+import java.util.Set;
 
-import java.util.List;
-
+@Entity
 public class Contract {
-    private int contract_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String startdate;
     private String enddate;
     private String deposit;
-    private String payment;
-    Employee employee;
-    Customer customer;
-    Service service;
-    List<Accompaniedservice> accompaniedserviceList;
+    @ManyToOne
+    @JoinColumn(name = "employeeId",referencedColumnName = "id")
+    private Employee employeeId;
+    @ManyToOne
+    @JoinColumn(name = "customerId",referencedColumnName = "id")
+    private Customer customerId;
+    @ManyToOne
+    @JoinColumn(name = "facilityId",referencedColumnName = "id")
+    private Facility facilityId;
+    @OneToMany(mappedBy = "contractDetailId")
+    private Set<ContractDetail> setContractDetailId;
 
     public Contract() {
     }
 
-    public Contract(Service service, Customer customer, Employee employee, String startdate, String enddate, String deposit) {
+    public Contract(int id, String startdate, String enddate, String deposit, Employee employeeId, Customer customerId, Facility facilityId, Set<ContractDetail> setContractDetailId) {
+        this.id = id;
         this.startdate = startdate;
         this.enddate = enddate;
         this.deposit = deposit;
-        this.customer = customer;
-        this.service = service;
-        this.employee = employee;
+        this.employeeId = employeeId;
+        this.customerId = customerId;
+        this.facilityId = facilityId;
+        this.setContractDetailId = setContractDetailId;
     }
 
-    public Contract(String startdate, String enddate, String deposit, String payment, Employee employee, Customer customer, Service service) {
-        this.startdate = startdate;
-        this.enddate = enddate;
-        this.deposit = deposit;
-        this.payment = payment;
-        this.employee = employee;
-        this.customer = customer;
-        this.service = service;
-    }
-    public Contract(int contract_id, Service service, Customer customer, String startdate, String enddate, String deposit, String payment, List<Accompaniedservice> accompaniedserviceList) {
-        this.contract_id = contract_id;
-        this.startdate = startdate;
-        this.enddate = enddate;
-        this.deposit = deposit;
-        this.payment = payment;
-        this.customer = customer;
-        this.service = service;
-        this.accompaniedserviceList = accompaniedserviceList;
+    public int getId() {
+        return id;
     }
 
-    public List<Accompaniedservice> getAccompaniedserviceList() {
-        return accompaniedserviceList;
-    }
-
-    public void setAccompaniedserviceList(List<Accompaniedservice> accompaniedserviceList) {
-        this.accompaniedserviceList = accompaniedserviceList;
-    }
-
-    public int getContract_id() {
-        return contract_id;
-    }
-
-    public void setContract_id(int contract_id) {
-        this.contract_id = contract_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getStartdate() {
@@ -87,35 +69,35 @@ public class Contract {
         this.deposit = deposit;
     }
 
-    public String getPayment() {
-        return payment;
+    public Employee getEmployeeId() {
+        return employeeId;
     }
 
-    public void setPayment(String payment) {
-        this.payment = payment;
+    public void setEmployeeId(Employee employeeId) {
+        this.employeeId = employeeId;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public Customer getCustomerId() {
+        return customerId;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setCustomerId(Customer customerId) {
+        this.customerId = customerId;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public Facility getFacilityId() {
+        return facilityId;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setFacilityId(Facility facilityId) {
+        this.facilityId = facilityId;
     }
 
-    public Service getService() {
-        return service;
+    public Set<ContractDetail> getSetContractDetailId() {
+        return setContractDetailId;
     }
 
-    public void setService(Service service) {
-        this.service = service;
+    public void setSetContractDetailId(Set<ContractDetail> setContractDetailId) {
+        this.setContractDetailId = setContractDetailId;
     }
 }

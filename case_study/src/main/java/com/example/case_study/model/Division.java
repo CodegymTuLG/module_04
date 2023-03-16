@@ -1,34 +1,47 @@
 package com.example.case_study.model;
 
+import javax.persistence.*;
+import java.util.Set;
+
+@Entity
 public class Division {
-    private int workpart_id;
-    private String workpart;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @OneToMany(mappedBy = "divisionId")
+    private Set<Employee> setDivisionId;
+    private String name;
 
     public Division() {
     }
 
-    public Division(int workpart_id, String workpart) {
-        this.workpart_id = workpart_id;
-        this.workpart = workpart;
+    public Division(int id, Set<Employee> setDivisionId, String name) {
+        this.id = id;
+        this.setDivisionId = setDivisionId;
+        this.name = name;
     }
 
-    public Division(int workpart_id) {
-        this.workpart_id = workpart_id;
+    public int getId() {
+        return id;
     }
 
-    public int getWorkpart_id() {
-        return workpart_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setWorkpart_id(int workpart_id) {
-        this.workpart_id = workpart_id;
+    public Set<Employee> getSetDivisionId() {
+        return setDivisionId;
     }
 
-    public String getWorkpart() {
-        return workpart;
+    public void setSetDivisionId(Set<Employee> setDivisionId) {
+        this.setDivisionId = setDivisionId;
     }
 
-    public void setWorkpart(String workpart) {
-        this.workpart = workpart;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

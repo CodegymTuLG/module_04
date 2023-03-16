@@ -1,7 +1,7 @@
 package com.example.bt1.service;
 
 import com.example.bt1.model.Type;
-import com.example.bt1.respository.ITypeRespository;
+import com.example.bt1.repository.ITypeRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

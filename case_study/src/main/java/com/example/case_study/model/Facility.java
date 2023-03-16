@@ -1,65 +1,59 @@
 package com.example.case_study.model;
 
+import javax.persistence.*;
+import java.util.Set;
+
+@Entity
 public class Facility {
-    private int service_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String name;
     private int area;
-    private int rentprice;
-    private int maxperson;
-    private RentTypeMaster rentTypeMaster;
-    private ServiceTypeMaster serviceTypeMaster;
-    private String standar;
-    private String other_service_description;
-    private double pool_area;
-    private int floor;
-    private String free_service;
+    private double cost;
+    private int maxPeople;
+    @ManyToOne
+    @JoinColumn(name = "rentTypeId",referencedColumnName = "id")
+    private RentType rentTypeId;
+    @ManyToOne
+    @JoinColumn(name = "facilityTypeId",referencedColumnName = "id")
+    private FacilityType facilityTypeId;
+    private String standardRoom;
+    private String descriptionOtherConvenience;
+    @Column(nullable=true)
+    private Double poolArea;
+    @Column(nullable=true)
+    private Integer numberOfFloors;
+    @Column(nullable=true)
+    private String facilityFree;
+    @OneToMany(mappedBy = "facilityId")
+    private Set<Contract> setFacilityId;
 
     public Facility() {
     }
 
-    public Facility(String name) {
-        this.name = name;
-    }
-
-    public Facility(int service_id) {
-        this.service_id = service_id;
-    }
-
-    public Facility(int service_id, String name, int area, int rentprice, int maxperson, RentTypeMaster rentTypeMaster, ServiceTypeMaster serviceTypeMaster, String standar, String other_service_description, double pool_area, int floor, String free_service) {
-        this.service_id = service_id;
+    public Facility(int id, String name, int area, double cost, int maxPeople, RentType rentTypeId, FacilityType facilityTypeId, String standardRoom, String descriptionOtherConvenience, double poolArea, int numberOfFloors, String facilityFree, Set<Contract> setFacilityId) {
+        this.id = id;
         this.name = name;
         this.area = area;
-        this.rentprice = rentprice;
-        this.maxperson = maxperson;
-        this.rentTypeMaster = rentTypeMaster;
-        this.serviceTypeMaster = serviceTypeMaster;
-        this.standar = standar;
-        this.other_service_description = other_service_description;
-        this.pool_area = pool_area;
-        this.floor = floor;
-        this.free_service = free_service;
+        this.cost = cost;
+        this.maxPeople = maxPeople;
+        this.rentTypeId = rentTypeId;
+        this.facilityTypeId = facilityTypeId;
+        this.standardRoom = standardRoom;
+        this.descriptionOtherConvenience = descriptionOtherConvenience;
+        this.poolArea = poolArea;
+        this.numberOfFloors = numberOfFloors;
+        this.facilityFree = facilityFree;
+        this.setFacilityId = setFacilityId;
     }
 
-    public Facility(String name, int area, int rentprice, int maxperson, RentTypeMaster rentTypeMaster, ServiceTypeMaster serviceTypeMaster, String standar, String other_service_description, double pool_area, int floor, String free_service) {
-        this.name = name;
-        this.area = area;
-        this.rentprice = rentprice;
-        this.maxperson = maxperson;
-        this.rentTypeMaster = rentTypeMaster;
-        this.serviceTypeMaster = serviceTypeMaster;
-        this.standar = standar;
-        this.other_service_description = other_service_description;
-        this.pool_area = pool_area;
-        this.floor = floor;
-        this.free_service = free_service;
+    public int getId() {
+        return id;
     }
 
-    public int getService_id() {
-        return service_id;
-    }
-
-    public void setService_id(int service_id) {
-        this.service_id = service_id;
+    public void setId(int in) {
+        this.id = in;
     }
 
     public String getName() {
@@ -78,75 +72,83 @@ public class Facility {
         this.area = area;
     }
 
-    public int getRentprice() {
-        return rentprice;
+    public double getCost() {
+        return cost;
     }
 
-    public void setRentprice(int rentprice) {
-        this.rentprice = rentprice;
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 
-    public int getMaxperson() {
-        return maxperson;
+    public int getMaxPeople() {
+        return maxPeople;
     }
 
-    public void setMaxperson(int maxperson) {
-        this.maxperson = maxperson;
+    public void setMaxPeople(int maxPeople) {
+        this.maxPeople = maxPeople;
     }
 
-    public RentTypeMaster getRentTypeMaster() {
-        return rentTypeMaster;
+    public RentType getRentTypeId() {
+        return rentTypeId;
     }
 
-    public void setRentTypeMaster(RentTypeMaster rentTypeMaster) {
-        this.rentTypeMaster = rentTypeMaster;
+    public void setRentTypeId(RentType rentTypeId) {
+        this.rentTypeId = rentTypeId;
     }
 
-    public ServiceTypeMaster getServiceTypeMaster() {
-        return serviceTypeMaster;
+    public FacilityType getFacilityTypeId() {
+        return facilityTypeId;
     }
 
-    public void setServiceTypeMaster(ServiceTypeMaster serviceTypeMaster) {
-        this.serviceTypeMaster = serviceTypeMaster;
+    public void setFacilityTypeId(FacilityType facilityTypeId) {
+        this.facilityTypeId = facilityTypeId;
     }
 
-    public String getStandar() {
-        return standar;
+    public String getStandardRoom() {
+        return standardRoom;
     }
 
-    public void setStandar(String standar) {
-        this.standar = standar;
+    public void setStandardRoom(String standardRoom) {
+        this.standardRoom = standardRoom;
     }
 
-    public String getOther_service_description() {
-        return other_service_description;
+    public String getDescriptionOtherConvenience() {
+        return descriptionOtherConvenience;
     }
 
-    public void setOther_service_description(String other_service_description) {
-        this.other_service_description = other_service_description;
+    public void setDescriptionOtherConvenience(String descriptionOtherConvenience) {
+        this.descriptionOtherConvenience = descriptionOtherConvenience;
     }
 
-    public double getPool_area() {
-        return pool_area;
+    public Double getPoolArea() {
+        return poolArea;
     }
 
-    public void setPool_area(double pool_area) {
-        this.pool_area = pool_area;
+    public void setPoolArea(Double poolArea) {
+        this.poolArea = poolArea;
     }
 
-    public int getFloor() {
-        return floor;
+    public Integer getNumberOfFloors() {
+        return numberOfFloors;
     }
 
-    public void setFloor(int floor) {
-        this.floor = floor;
+    public void setNumberOfFloors(Integer numberOfFloors) {
+        this.numberOfFloors = numberOfFloors;
     }
 
-    public String getFree_service() {
-        return free_service;
+    public String getFacilityFree() {
+        return facilityFree;
     }
 
-    public void setFree_service(String free_service) {
-        this.free_service = free_service;
+    public void setFacilityFree(String facilityFree) {
+        this.facilityFree = facilityFree;
+    }
+
+    public Set<Contract> getSetFacilityId() {
+        return setFacilityId;
+    }
+
+    public void setSetFacilityId(Set<Contract> setFacilityId) {
+        this.setFacilityId = setFacilityId;
     }
 }

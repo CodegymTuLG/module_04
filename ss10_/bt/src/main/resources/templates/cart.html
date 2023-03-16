@@ -1,10 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/templates/bootstrap-5.0.2-dist/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 <body>
-$END$
+<p>
+    <a href="/bookstore">Shop</a>
+</p>
+<h1>Your Cart</h1>
+<form th:action="@{/shop}" th:object="${cart}" method="post">
+    <h3>Total Items: <span th:text="${cart.countItemQuantity()}"></span></h3>
+    <h3>Total Products: <span th:text="${cart.countBookQuantity()}"></span></h3>
+    <table class="table">
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+        <tr th:each="book: ${cart.books}">
+            <td>
+            <div>
+                <img th:src="${book.getKey().getImageURL()}" th:alt-title="${book.getKey().getName()}" th:alt="${book.getKey().getName()}" height="172" width="300">
+                <p th:text="${book.getKey().getName()}"></p>
+                <p th:text="${book.getKey().getPrice()}"></p>
+            </div>
+            </td>
+            <td>
+                <a id="decrease_button" th:href="@{/add/__${book.getKey().id}__(action='-')}"
+                   th:text="${'-'}"></a>
+                <span th:text="${book.getValue()}"></span>
+                <a id="increase_button" th:href="@{/add/__${book.getKey().id}__(action='+')}"
+                   th:text="${'+'}"></a>
+            </td>
+            <td th:text="${book.getKey().price}"></td>
+        </tr>
+        <tr th:if="${cart.countTotalPayment()}!=0">
+            <td>Total</td>
+            <td></td>
+            <td th:text="${cart.countTotalPayment()}"></td>
+        </tr>
+        <tr th:if="${cart.countTotalPayment()}==0">
+            <td colspan="3">CART IS EMPTY</td>
+        </tr>
+    </table>
+</form>
 </body>
 </html>

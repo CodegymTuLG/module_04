@@ -1,33 +1,41 @@
 package com.example.case_study.model;
 
+import javax.persistence.*;
+import java.util.Set;
+
+@Entity
 public class FacilityType {
-    private int servicetype_id;
-    private String type;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String name;
+    @OneToMany(mappedBy = "facilityTypeId")
+    private Set<Facility> setFacilityTypeId;
 
     public FacilityType() {
     }
 
-    public FacilityType(int servicetype_id, String type) {
-        this.servicetype_id = servicetype_id;
-        this.type = type;
-    }
-    public FacilityType(int servicetype_id) {
-        this.servicetype_id = servicetype_id;
+    public int getId() {
+        return id;
     }
 
-    public int getServicetype_id() {
-        return servicetype_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setServicetype_id(int servicetype_id) {
-        this.servicetype_id = servicetype_id;
+    public String getName() {
+        return name;
     }
 
-    public String getType() {
-        return type;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public Set<Facility> getSetFacilityTypeId() {
+        return setFacilityTypeId;
+    }
+
+    public void setSetFacilityTypeId(Set<Facility> setFacilityTypeId) {
+        this.setFacilityTypeId = setFacilityTypeId;
     }
 }

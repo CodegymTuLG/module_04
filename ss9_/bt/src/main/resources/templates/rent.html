@@ -13,17 +13,17 @@
         <td>Book Name</td>
         <td>
             <select th:field="*{bookId}" onchange="makeid(5)">
-                <option value="null">select book</option>
+                <option th:value="0">select book</option>
                 <option th:each="book : ${bookLibrary}" th:value="${book.getId()}" th:text="${book.getBookName()}"></option>
             </select>
         </td>
         <td>
-            <input id="rentIdRandom" name="rentIdRandom" th:field="*{rentId}" maxlength="5">
-            <small style="color: red" th:if="${#fields.hasErrors('rentId')}" th:errors="*{rentId}"></small><br>
+            <input id="rentIdRandom" name="rentIdRandom" th:field="*{rentId}" maxlength="5"><br>
+            <small style="color: red" th:if="${#fields.hasErrors('rentId')}" th:errors="*{rentId}"></small>
         </td>
     </tr>
     <small style="color: red" th:text="${message}"></small><br>
-    <small id="buttonSubmit" name="buttonSubmit" ></small>
+    <button type='submit'>Rent</button>
 
 </form>
 <script>
@@ -37,12 +37,11 @@
             result += characters.charAt(Math.floor(Math.random() * charactersLength));
             counter += 1;
         }
-        if(optionId == "null"){
-            document.getElementById("buttonSubmit").innerHTML = "";
+        if(optionId == "0"){
             document.getElementById("rentIdRandom").value = "";
             document.getElementById("statusId").value = "";
         }else {
-            document.getElementById("buttonSubmit").innerHTML = "<button type='submit'>Rent</button>";
+
             document.getElementById("rentIdRandom").value = result;
             document.getElementById("statusId").value = "1";
         }

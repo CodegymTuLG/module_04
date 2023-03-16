@@ -13,6 +13,7 @@
         <td>Rent Id</td>
         <td>
             <input th:field="*{rentId}" maxlength="5" onchange="statusChange()"><br>
+            <small style="color: red" th:if="${#fields.hasErrors('rentId')}" th:errors="*{rentId}"></small>
             <small style="color: red" th:text="${message}"></small><br>
         </td>
     </tr>

@@ -1,7 +1,13 @@
-package model;
+package com.example.case_study.model;
 
+import javax.persistence.*;
+import java.util.Set;
+
+@Entity
 public class Employee {
-    private int employee_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String name;
     private String birthday;
     private String cardid;
@@ -9,19 +15,26 @@ public class Employee {
     private String phonenumber;
     private String email;
     private String address;
-    PositionMaster positionMaster;
-    LevelMaster levelMaster;
-    WorkPartMaster workPartMaster;
+    @ManyToOne
+    @JoinColumn(name = "positionId",referencedColumnName = "id")
+    private Position_ positionId;
+    @ManyToOne
+    @JoinColumn(name = "educationDegreeId",referencedColumnName = "id")
+    private EducationDegree educationDegreeId;
+    @ManyToOne
+    @JoinColumn(name = "divisionId",referencedColumnName = "id")
+    private Division divisionId;
+    @ManyToOne
+    @JoinColumn(name = "userName",referencedColumnName = "userName")
+    private User userName;
+    @OneToMany(mappedBy = "employeeId")
+    private Set<Contract> setEmployeeId;
 
     public Employee() {
     }
 
-    public Employee(int employee_id) {
-        this.employee_id = employee_id;
-    }
-
-    public Employee(int employee_id, String name, String birthday, String cardid, double salary, String phonenumber, String email, String address, PositionMaster positionMaster, LevelMaster levelMaster, WorkPartMaster workPartMaster) {
-        this.employee_id = employee_id;
+    public Employee(int id, String name, String birthday, String cardid, double salary, String phonenumber, String email, String address, Position_ positionId, EducationDegree educationDegreeId, Division divisionId, User userName, Set<Contract> setEmployeeId) {
+        this.id = id;
         this.name = name;
         this.birthday = birthday;
         this.cardid = cardid;
@@ -29,30 +42,19 @@ public class Employee {
         this.phonenumber = phonenumber;
         this.email = email;
         this.address = address;
-        this.positionMaster = positionMaster;
-        this.levelMaster = levelMaster;
-        this.workPartMaster = workPartMaster;
+        this.positionId = positionId;
+        this.educationDegreeId = educationDegreeId;
+        this.divisionId = divisionId;
+        this.userName = userName;
+        this.setEmployeeId = setEmployeeId;
     }
 
-    public Employee(String name, String birthday, String cardid, double salary, String phonenumber, String email, String address, PositionMaster positionMaster, LevelMaster levelMaster, WorkPartMaster workPartMaster) {
-        this.name = name;
-        this.birthday = birthday;
-        this.cardid = cardid;
-        this.salary = salary;
-        this.phonenumber = phonenumber;
-        this.email = email;
-        this.address = address;
-        this.positionMaster = positionMaster;
-        this.levelMaster = levelMaster;
-        this.workPartMaster = workPartMaster;
+    public int getId() {
+        return id;
     }
 
-    public int getEmployee_id() {
-        return employee_id;
-    }
-
-    public void setEmployee_id(int employee_id) {
-        this.employee_id = employee_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -111,27 +113,43 @@ public class Employee {
         this.address = address;
     }
 
-    public PositionMaster getPositionMaster() {
-        return positionMaster;
+    public Position_ getPositionId() {
+        return positionId;
     }
 
-    public void setPositionMaster(PositionMaster positionMaster) {
-        this.positionMaster = positionMaster;
+    public void setPositionId(Position_ positionId) {
+        this.positionId = positionId;
     }
 
-    public LevelMaster getLevelMaster() {
-        return levelMaster;
+    public EducationDegree getEducationDegreeId() {
+        return educationDegreeId;
     }
 
-    public void setLevelMaster(LevelMaster levelMaster) {
-        this.levelMaster = levelMaster;
+    public void setEducationDegreeId(EducationDegree educationDegreeId) {
+        this.educationDegreeId = educationDegreeId;
     }
 
-    public WorkPartMaster getWorkPartMaster() {
-        return workPartMaster;
+    public Division getDivisionId() {
+        return divisionId;
     }
 
-    public void setWorkPartMaster(WorkPartMaster workPartMaster) {
-        this.workPartMaster = workPartMaster;
+    public void setDivisionId(Division division) {
+        this.divisionId = division;
+    }
+
+    public User getUserName() {
+        return userName;
+    }
+
+    public void setUserName(User userName) {
+        this.userName = userName;
+    }
+
+    public Set<Contract> getSetEmployeeId() {
+        return setEmployeeId;
+    }
+
+    public void setSetEmployeeId(Set<Contract> setEmployeeId) {
+        this.setEmployeeId = setEmployeeId;
     }
 }

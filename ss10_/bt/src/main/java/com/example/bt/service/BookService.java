@@ -1,28 +1,29 @@
 package com.example.bt.service;
 
-import com.example.bt.model.BookLibrary;
-import com.example.bt.repository.IBookLibraryRepository;
+import com.example.bt.model.Book;
+import com.example.bt.repository.IBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
-public class BookLibraryService implements IBookLibraryService{
+public class BookService implements IBookService {
     @Autowired
-    IBookLibraryRepository iBookLibraryRepository;
+    IBookRepository iBookRepository;
     @Override
-    public List<BookLibrary> findAll() {
-        return iBookLibraryRepository.findAll();
+    public List<Book> findAll() {
+        return iBookRepository.findAll();
     }
 
     @Override
-    public BookLibrary findById(int id) {
-        return iBookLibraryRepository.findById(id).orElse(null);
+    public Book findById(int id) {
+        return iBookRepository.findById(id).orElse(null);
     }
 
     @Override
-    public void save(BookLibrary bookLibrary) {
-        iBookLibraryRepository.save(bookLibrary);
+    public void save(Book book) {
+        iBookRepository.save(book);
     }
 
     @Override

@@ -15,9 +15,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.awt.print.Pageable;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class LibraryController {
@@ -27,8 +30,17 @@ public class LibraryController {
     IRentHistoryService rentHistoryService;
 
     @GetMapping("/library")
-    public String showList(Model model){
+    public String showList(Model model, @RequestParam Optional<Integer> page){
         List<BookLibrary> libraryList = bookLibraryService.findAll();
+
+//        int page1=0;
+//        if (page.isPresent()){
+//            page1 = page.get();
+//        }
+//        Pageable pageable = PageRequest.of(page1,2,Sort.by("name").descending());
+//        Page<Student> pages = studentService.search(searchName,pageable);
+//        model.addAttribute("pages",pages);
+
         model.addAttribute("libraryList", libraryList);
         return "list";
     }
@@ -62,6 +74,8 @@ public class LibraryController {
         String messageError = "Dont have any book to rent, Please try again!";
         if (bindingResult.hasFieldErrors()){
 // thiếu bookLibrary nên nếu bị bắt validate thì sẽ bị lỗi
+//            model.addAttribute("rentHistoryDto",rentHistoryDto);
+            model.addAttribute("bookLibrary",bookLibraryService.findAll());
             return "rent";
         }
         RentHistory rentHistory = new RentHistory();
