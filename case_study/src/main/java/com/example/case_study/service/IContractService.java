@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface IContractService {
     Page<ContractDto> findAllContract(Pageable pageable);
-    public void insertContract(Contract contract);
-    public List<AttachFacility> getContractDetailbyContractId(int contract_id);
-    public void insertContractDetail(ContractDetail contractDetail);
+    void save(Contract contract);
+    List<AttachFacility> getContractDetailbyContractId(int contract_id);
+    void insertContractDetail(ContractDetail contractDetail);
 }

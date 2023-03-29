@@ -18,7 +18,7 @@ public class Customer {
     private String phonenumber;
     private String email;
     private String address;
-    @OneToMany(mappedBy = "customerId")
+    @OneToMany(mappedBy = "customer")
     private Set<Contract> setCustomerId;
 
     public Customer() {

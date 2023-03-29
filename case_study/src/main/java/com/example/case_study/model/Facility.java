@@ -9,9 +9,9 @@ public class Facility {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private int area;
-    private double cost;
-    private int maxPeople;
+    private Integer area;
+    private Double cost;
+    private Integer maxPeople;
     @ManyToOne
     @JoinColumn(name = "rentTypeId",referencedColumnName = "id")
     private RentType rentTypeId;
@@ -20,13 +20,10 @@ public class Facility {
     private FacilityType facilityTypeId;
     private String standardRoom;
     private String descriptionOtherConvenience;
-    @Column(nullable=true)
     private Double poolArea;
-    @Column(nullable=true)
     private Integer numberOfFloors;
-    @Column(nullable=true)
     private String facilityFree;
-    @OneToMany(mappedBy = "facilityId")
+    @OneToMany(mappedBy = "facility")
     private Set<Contract> setFacilityId;
 
     public Facility() {

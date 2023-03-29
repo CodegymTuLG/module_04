@@ -11,7 +11,7 @@ public class Employee {
     private String name;
     private String birthday;
     private String cardid;
-    private double salary;
+    private Double salary;
     private String phonenumber;
     private String email;
     private String address;
@@ -25,15 +25,15 @@ public class Employee {
     @JoinColumn(name = "divisionId",referencedColumnName = "id")
     private Division divisionId;
     @ManyToOne
-    @JoinColumn(name = "userName",referencedColumnName = "userName")
-    private User userName;
-    @OneToMany(mappedBy = "employeeId")
+    @JoinColumn(name = "User_Name",referencedColumnName = "User_Name")
+    private AppUser appUserName;
+    @OneToMany(mappedBy = "employee")
     private Set<Contract> setEmployeeId;
 
     public Employee() {
     }
 
-    public Employee(int id, String name, String birthday, String cardid, double salary, String phonenumber, String email, String address, Position_ positionId, EducationDegree educationDegreeId, Division divisionId, User userName, Set<Contract> setEmployeeId) {
+    public Employee(int id, String name, String birthday, String cardid, double salary, String phonenumber, String email, String address, Position_ positionId, EducationDegree educationDegreeId, Division divisionId, AppUser appUserName, Set<Contract> setEmployeeId) {
         this.id = id;
         this.name = name;
         this.birthday = birthday;
@@ -45,7 +45,7 @@ public class Employee {
         this.positionId = positionId;
         this.educationDegreeId = educationDegreeId;
         this.divisionId = divisionId;
-        this.userName = userName;
+        this.appUserName = appUserName;
         this.setEmployeeId = setEmployeeId;
     }
 
@@ -81,11 +81,11 @@ public class Employee {
         this.cardid = cardid;
     }
 
-    public double getSalary() {
+    public Double getSalary() {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(Double salary) {
         this.salary = salary;
     }
 
@@ -137,12 +137,12 @@ public class Employee {
         this.divisionId = division;
     }
 
-    public User getUserName() {
-        return userName;
+    public AppUser getUserName() {
+        return appUserName;
     }
 
-    public void setUserName(User userName) {
-        this.userName = userName;
+    public void setUserName(AppUser appUserName) {
+        this.appUserName = appUserName;
     }
 
     public Set<Contract> getSetEmployeeId() {

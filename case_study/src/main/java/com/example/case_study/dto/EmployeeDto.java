@@ -1,14 +1,14 @@
 package com.example.case_study.dto;
 
-import javax.persistence.*;
-import java.util.Set;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
-public class EmployeeDto {
+public class EmployeeDto implements Validator {
     private int id;
     private String name;
     private String birthday;
     private String cardid;
-    private double salary;
+    private Double salary;
     private String phonenumber;
     private String email;
     private String address;
@@ -67,11 +67,11 @@ public class EmployeeDto {
         this.cardid = cardid;
     }
 
-    public double getSalary() {
+    public Double getSalary() {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(Double salary) {
         this.salary = salary;
     }
 
@@ -131,4 +131,13 @@ public class EmployeeDto {
         this.userDtoName = userDtoName;
     }
 
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+
+    }
 }

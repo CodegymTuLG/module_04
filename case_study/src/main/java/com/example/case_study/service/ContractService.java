@@ -4,6 +4,7 @@ import com.example.case_study.dto.ContractDto;
 import com.example.case_study.model.AttachFacility;
 import com.example.case_study.model.Contract;
 import com.example.case_study.model.ContractDetail;
+import com.example.case_study.repository.IContractNewRepository;
 import com.example.case_study.repository.IContractRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,16 +15,17 @@ import java.util.List;
 @Service
 public class ContractService implements IContractService{
     @Autowired
-    IContractRepository repository;
-
+    IContractRepository contractDtoRepository;
+    @Autowired
+    IContractNewRepository newRepository;
     @Override
     public Page<ContractDto> findAllContract(Pageable pageable) {
-        return repository.findAllContract(pageable);
+        return contractDtoRepository.findAllContract(pageable);
     }
 
     @Override
-    public void insertContract(Contract contract) {
-
+    public void save(Contract contract) {
+        newRepository.save(contract);
     }
 
     @Override

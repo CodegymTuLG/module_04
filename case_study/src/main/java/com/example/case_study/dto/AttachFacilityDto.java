@@ -1,24 +1,26 @@
 package com.example.case_study.dto;
 
-import javax.persistence.*;
-import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
 public class AttachFacilityDto {
+    @Id
     private int id;
     private String name;
-    private double cost;
+    private Double cost;
     private String unit;
-    private String status;
+    private Integer quantity;
 
     public AttachFacilityDto() {
     }
 
-    public AttachFacilityDto(int id, String name, double cost, String unit, String status) {
+    public AttachFacilityDto(int id, String name, double cost, String unit, Integer quantity) {
         this.id = id;
         this.name = name;
         this.cost = cost;
         this.unit = unit;
-        this.status = status;
+        this.quantity = quantity;
     }
 
     public int getId() {
@@ -37,11 +39,11 @@ public class AttachFacilityDto {
         this.name = name;
     }
 
-    public double getCost() {
+    public Double getCost() {
         return cost;
     }
 
-    public void setCost(double cost) {
+    public void setCost(Double cost) {
         this.cost = cost;
     }
 
@@ -53,11 +55,11 @@ public class AttachFacilityDto {
         this.unit = unit;
     }
 
-    public String getStatus() {
-        return status;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setQuantity(Integer status) {
+        this.quantity = status;
     }
 }
